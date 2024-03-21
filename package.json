@@ -1,0 +1,41 @@
+{
+  "name": "mesto-api",
+  "version": "1.0.0",
+  "description": "mesto service backend",
+  "main": "./src/app.ts",
+  "type": "module",
+  "scripts": {
+    "dev": "npx nodemon",
+    "build": "tsc",
+    "start": "ts-node src/app.ts",
+    "lint": "npx eslint src/**/*.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Maschinebau/mesto-api.git"
+  },
+  "author": "Osipov Alex 2024",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Maschinebau/mesto-api/issues"
+  },
+  "homepage": "https://github.com/Maschinebau/mesto-api#readme",
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/mongoose": "^5.11.97",
+    "@types/node": "^20.11.27",
+    "@typescript-eslint/eslint-plugin": "^7.2.0",
+    "@typescript-eslint/parser": "^7.2.0",
+    "eslint": "^8.57.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.29.1",
+    "nodemon": "^3.1.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.2"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "express": "^4.18.3",
+    "mongoose": "^8.2.2"
+  }
+}
