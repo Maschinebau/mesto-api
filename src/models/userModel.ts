@@ -4,6 +4,7 @@ export interface IUser extends Document {
   name: string
   about: string
   avatar: string
+  _id?: string
 }
 
 const userSchema: Schema = new Schema<IUser>({
