@@ -1,8 +1,8 @@
-import { Request, Response } from "express"
-import { BaseController } from "./baseController.js"
-import { CardModel, ICard } from "../models/cardModel.js"
-import { UserModel } from "../models/userModel.js"
-import { ErrorStatuses, ResponceCodes } from "../utils/responces.js"
+import { Request, Response } from 'express'
+import { BaseController } from './baseController.js'
+import { CardModel, ICard } from '../models/cardModel.js'
+import { UserModel } from '../models/userModel.js'
+import { ErrorStatuses, ResponceCodes } from '../utils/responces.js'
 
 class CardController extends BaseController<ICard> {
   constructor() {
@@ -31,7 +31,7 @@ class CardController extends BaseController<ICard> {
       const document = await this.model.create(cardData)
       res.status(ResponceCodes.CREATED).json(document)
     } catch (error) {
-      this.handleError(res, error)
+      this.handleError(res)
     }
   }
 
@@ -51,7 +51,7 @@ class CardController extends BaseController<ICard> {
 
       res.status(ResponceCodes.SUCCESS).json(updatedCard)
     } catch (error) {
-      this.handleError(res, error)
+      this.handleError(res)
     }
   }
 
@@ -71,7 +71,7 @@ class CardController extends BaseController<ICard> {
 
       res.status(ResponceCodes.SUCCESS).json(updatedCard)
     } catch (error) {
-      this.handleError(res, error)
+      this.handleError(res)
     }
   }
 }

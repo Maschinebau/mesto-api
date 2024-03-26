@@ -1,7 +1,7 @@
-import { Request, Response } from "express"
-import { BaseController } from "./baseController.js"
-import { UserModel, IUser } from "../models/userModel.js"
-import { ErrorStatuses, ResponceCodes } from "../utils/responces.js"
+import { Request, Response } from 'express'
+import { BaseController } from './baseController.js'
+import { UserModel, IUser } from '../models/userModel.js'
+import { ErrorStatuses, ResponceCodes } from '../utils/responces.js'
 
 class UserController extends BaseController<IUser> {
   constructor() {
@@ -18,14 +18,14 @@ class UserController extends BaseController<IUser> {
       const document = await this.model.create(req.body)
       res.status(ResponceCodes.CREATED).json(document)
     } catch (error) {
-      this.handleError(res, error)
+      this.handleError(res)
     }
   }
 
   updateCurrentUserProfile = async (req: Request, res: Response): Promise<void> => {
     try {
       if (!req.body.name && !req.body.about) {
-        res.status(ResponceCodes.DATA_INCORRECT).json({ message: "Ни одно из полей не заполнено" })
+        res.status(ResponceCodes.DATA_INCORRECT).json({ message: 'Ни одно из полей не заполнено' })
         return
       }
 
@@ -48,14 +48,14 @@ class UserController extends BaseController<IUser> {
 
       res.status(ResponceCodes.SUCCESS).json(updatedUser)
     } catch (error) {
-      this.handleError(res, error)
+      this.handleError(res)
     }
   }
 
   updateCurrentUserAvatar = async (req: Request, res: Response): Promise<void> => {
     try {
       if (!req.body.avatar) {
-        res.status(ResponceCodes.DATA_INCORRECT).json({ message: "Не заполнено поле с сылкой" })
+        res.status(ResponceCodes.DATA_INCORRECT).json({ message: 'Не заполнено поле с сылкой' })
         return
       }
       // @ts-ignore
@@ -73,7 +73,7 @@ class UserController extends BaseController<IUser> {
 
       res.status(ResponceCodes.SUCCESS).json(updatedUser)
     } catch (error) {
-      this.handleError(res, error)
+      this.handleError(res)
     }
   }
 }

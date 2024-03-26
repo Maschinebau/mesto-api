@@ -1,6 +1,6 @@
-import { Request, Response } from "express"
-import { Model, Document } from "mongoose"
-import { ErrorStatuses, ResponceCodes } from "../utils/responces.js"
+import { Request, Response } from 'express'
+import { Model, Document } from 'mongoose'
+import { ErrorStatuses, ResponceCodes } from '../utils/responces.js'
 
 export class BaseController<T extends Document> {
   model: Model<T>
@@ -9,7 +9,7 @@ export class BaseController<T extends Document> {
     this.model = model
   }
 
-  protected handleError = (res: Response, error: any) => {
+  protected handleError = (res: Response) => {
     res.status(ResponceCodes.SERVER_ERROR).json({ error: ErrorStatuses.INTERNAL_SERVER })
   }
 
@@ -18,7 +18,7 @@ export class BaseController<T extends Document> {
       const documents = await this.model.find()
       res.status(ResponceCodes.SUCCESS).json(documents)
     } catch (error) {
-      this.handleError(res, error)
+      this.handleError(res)
     }
   }
 
@@ -32,7 +32,7 @@ export class BaseController<T extends Document> {
         res.status(ResponceCodes.SUCCESS).json(document)
       }
     } catch (error) {
-      this.handleError(res, error)
+      this.handleError(res)
     }
   }
 
@@ -46,7 +46,7 @@ export class BaseController<T extends Document> {
         res.status(ResponceCodes.SUCCESS).json(document)
       }
     } catch (error) {
-      this.handleError(res, error)
+      this.handleError(res)
     }
   }
 }
