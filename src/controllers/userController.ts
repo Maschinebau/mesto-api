@@ -1,8 +1,7 @@
 import { Request, Response } from "express"
 import { BaseController } from "./baseController.js"
 import { UserModel, IUser } from "../models/userModel.js"
-import { ErrorStatuses } from "../utils/responces.js"
-import { ResponceCodes } from '../utils/responces.js';
+import { ErrorStatuses, ResponceCodes } from "../utils/responces.js"
 
 class UserController extends BaseController<IUser> {
   constructor() {
