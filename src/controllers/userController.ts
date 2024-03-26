@@ -1,7 +1,8 @@
-import { Request, Response } from 'express'
-import { BaseController } from './baseController.js'
-import { UserModel, IUser } from '../models/userModel.js'
-import { ErrorStatuses } from '../utils/errors.js'
+import { Request, Response } from "express"
+import { BaseController } from "./baseController.js"
+import { UserModel, IUser } from "../models/userModel.js"
+import { ErrorStatuses } from "../utils/responces.js"
+import { ResponceCodes } from '../utils/responces.js';
 
 class UserController extends BaseController<IUser> {
   constructor() {
@@ -11,12 +12,12 @@ class UserController extends BaseController<IUser> {
   createUser = async (req: Request, res: Response): Promise<void> => {
     try {
       if (!req.body.name || !req.body.about || !req.body.avatar) {
-        res.status(400).json({ message: ErrorStatuses.MISSING_FIELDS })
+        res.status(ResponceCodes.DATA_INCORRECT).json({ message: ErrorStatuses.MISSING_FIELDS })
         return
       }
 
       const document = await this.model.create(req.body)
-      res.status(201).json(document)
+      res.status(ResponceCodes.CREATED).json(document)
     } catch (error) {
       this.handleError(res, error)
     }
@@ -25,7 +26,7 @@ class UserController extends BaseController<IUser> {
   updateCurrentUserProfile = async (req: Request, res: Response): Promise<void> => {
     try {
       if (!req.body.name && !req.body.about) {
-        res.status(400).json({ message: 'Ни одно из полей не заполнено' })
+        res.status(ResponceCodes.DATA_INCORRECT).json({ message: "Ни одно из полей не заполнено" })
         return
       }
 
@@ -42,11 +43,11 @@ class UserController extends BaseController<IUser> {
       })
 
       if (!updatedUser) {
-        res.status(404).json({ error: ErrorStatuses.DOC_NOT_FOUND })
+        res.status(ResponceCodes.NOT_FOUND).json({ error: ErrorStatuses.DOC_NOT_FOUND })
         return
       }
 
-      res.status(200).json(updatedUser)
+      res.status(ResponceCodes.SUCCESS).json(updatedUser)
     } catch (error) {
       this.handleError(res, error)
     }
@@ -55,7 +56,7 @@ class UserController extends BaseController<IUser> {
   updateCurrentUserAvatar = async (req: Request, res: Response): Promise<void> => {
     try {
       if (!req.body.avatar) {
-        res.status(400).json({ message: 'Не заполнено поле с сылкой' })
+        res.status(ResponceCodes.DATA_INCORRECT).json({ message: "Не заполнено поле с сылкой" })
         return
       }
       // @ts-ignore
@@ -67,11 +68,11 @@ class UserController extends BaseController<IUser> {
       )
 
       if (!updatedUser) {
-        res.status(404).json({ error: ErrorStatuses.DOC_NOT_FOUND })
+        res.status(ResponceCodes.NOT_FOUND).json({ error: ErrorStatuses.DOC_NOT_FOUND })
         return
       }
 
-      res.status(200).json(updatedUser)
+      res.status(ResponceCodes.SUCCESS).json(updatedUser)
     } catch (error) {
       this.handleError(res, error)
     }
